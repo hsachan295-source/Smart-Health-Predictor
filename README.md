@@ -6,7 +6,7 @@ A machine learning-powered web application that predicts disease risk based on l
 
 ## 🚀 Live Demo
 
-👉 **[Click here to use the app](YOUR_DEPLOYMENT_LINK_HERE)**
+👉 https://smart-health-predictor-cy2oyhvpsfaw5f2cvsq3xy.streamlit.app/
 
 ---
 
