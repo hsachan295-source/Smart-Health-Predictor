@@ -1,13 +1,12 @@
 import streamlit as st
-import pickle
+import joblib          # ← YAHAN CHANGE HAI (pickle tha pehle)
 import numpy as np
 import os
 
 @st.cache_resource
 def load_model():
     model_path = os.path.join(os.path.dirname(__file__), '..', 'decision_tree_model.pkl')
-    with open(model_path, 'rb') as f:
-        return pickle.load(f)
+    return joblib.load(model_path)   # ← YAHAN CHANGE HAI (pickle.load tha pehle)
 
 def show():
     model = load_model()
@@ -15,7 +14,6 @@ def show():
     st.markdown("### 📝 Patient Health Details Bharo")
     st.markdown("Sabhi fields fill karo aur prediction le lo.")
 
-    # ── Section 1: Personal Info ──────────────────────────────────
     st.markdown('<div class="section-title">👤 Personal Information</div>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
     with c1:
@@ -26,7 +24,6 @@ def show():
         gender = st.selectbox("⚧ Gender", ["Male", "Female"])
         gender_val = 1 if gender == "Male" else 0
 
-    # ── Section 2: Body Metrics ───────────────────────────────────
     st.markdown('<div class="section-title">📏 Body Metrics</div>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
     with c1:
@@ -37,7 +34,6 @@ def show():
     with c3:
         sleep_hours = st.slider("😴 Sleep Hours", min_value=1.0, max_value=12.0, value=7.0, step=0.5)
 
-    # ── Section 3: Diet & Lifestyle ───────────────────────────────
     st.markdown('<div class="section-title">🥗 Diet & Lifestyle</div>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
     with c1:
@@ -53,7 +49,6 @@ def show():
         alcohol_input = st.selectbox("🍺 Alcohol Consumer?", ["No", "Yes"])
         alcohol = 1 if alcohol_input == "Yes" else 0
 
-    # ── Section 4: Medical Parameters ────────────────────────────
     st.markdown('<div class="section-title">🏥 Medical Parameters</div>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
     with c1:
@@ -72,7 +67,6 @@ def show():
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # ── Predict Button ────────────────────────────────────────────
     col_btn = st.columns([1, 2, 1])
     with col_btn[1]:
         st.markdown('<div class="predict-btn">', unsafe_allow_html=True)
@@ -140,7 +134,6 @@ def show():
                 recs.append("👨‍⚕️ Doctor se regular checkup karte raho")
             for r in recs:
                 st.warning(r)
-
         else:
             st.markdown(f"""
             <div class="result-box-low">
@@ -153,3 +146,4 @@ def show():
             st.markdown("#### 🌟 Keep it Up!")
             st.success("✅ Aapki lifestyle healthy hai. Aise hi bane raho!")
             st.info("📅 Saal mein ek baar doctor se routine checkup zaroor karwao.")
+ 
