@@ -1,12 +1,12 @@
 import streamlit as st
-import joblib          # ← YAHAN CHANGE HAI (pickle tha pehle)
+import joblib
 import numpy as np
 import os
 
 @st.cache_resource
 def load_model():
     model_path = os.path.join(os.path.dirname(__file__), '..', 'decision_tree_model.pkl')
-    return joblib.load(model_path)   # ← YAHAN CHANGE HAI (pickle.load tha pehle)
+    return joblib.load(model_path)
 
 def show():
     model = load_model()
@@ -146,4 +146,3 @@ def show():
             st.markdown("#### 🌟 Keep it Up!")
             st.success("✅ Aapki lifestyle healthy hai. Aise hi bane raho!")
             st.info("📅 Saal mein ek baar doctor se routine checkup zaroor karwao.")
- 
